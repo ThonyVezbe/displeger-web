@@ -1,4 +1,4 @@
-<footer id="mainFooter" class="navbar navbar-expand-sm bg-white">
+<footer id="mainFooter" class="navbar navbar-expand-sm">
     <ul class="navbar-nav mr-auto col justify-content-md-center">
         <li class="nav-item">
             <a class="nav-link" href="{{path('mail')}}">{{'app.contact'|trans}}</a>
@@ -7,13 +7,19 @@
             <a class="nav-link" href="{{path('notice')}}">{{'app.legal.notice'|trans}}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{path('thanks')}}">{{'app.thanks'|trans}}</a>
+            <a class="nav-link" href="{{path('page', {'code': 'thanks'})}}">{{'app.thanks'|trans}}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="">Lorem ipsum</a>
+            <a class="nav-link" href="{{path('sources')}}">{{'app.page.sources'|trans}}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="">Lorem ipsum</a>
+            <a class="nav-link" target="_blank" href="https://github.com/Drouizig/displeger-web">{{'app.source_code'|trans}}</a>
+        </li>
+        <li>
+            <a class="nav-link" target="_blank" href="http://drouizig.org"><img height="30" src="{{ asset('build/drouizig-logo.png') }}" /></a>
+        </li>
+        <li>
+            <a class="nav-link" target="_blank" href="https://bedniverel.bzh"><img height="30" src="{{ asset('build/bedniverel.png') }}" /></a>
         </li>
     </ul>
 </footer>

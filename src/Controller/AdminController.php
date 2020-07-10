@@ -13,7 +13,11 @@ use App\Form\VerbType;
 
 use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Configuration;
+use App\Entity\Source;
+use App\Entity\VerbLocalization;
+use App\Entity\VerbTranslation;
 use App\Form\ConfigurationType;
+use App\Form\SourceType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -37,43 +41,109 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/verbs", name="admin")
+     * @Route("/admin/verbs", name="admin_verbs")
      */
     public function verbs(Request $request) {
+        return $this->adminList($request, Verb::class, 'admin/verbs.html.twig');
+    }
 
-        $verbRepository = $this->getDoctrine()->getRepository(Verb::class);
+    /**
+     * @Route("/admin/sources", name="admin_sources")
+     */
+    public function sources(Request $request) {
+        return $this->adminList($request, Source::class, 'admin/sources.html.twig');    
+    }
+    /**
+     * @Route("/admin/configurations", name="admin_configurations")
+     */
+    public function configurations(Request $request) {
+        return $this->adminList($request, Configuration::class, 'admin/configurations.html.twig');    
+    }
+
+    public function adminList(Request $request, string $class,string $twig) {
+        /** @var AdminRepositoryInterface */
+        $repository = $this->getDoctrine()->getRepository($class);
 
         $search = $request->query->get('search', null);
-        $verbsQuery = $verbRepository->getBackSearchQuery($search);
+        $query = $repository->getBackSearchQuery($search);
 
         $pagination = $this->knpPaginator->paginate(
-            $verbsQuery, /* query NOT result */
+            $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             $request->query->getInt('number', 25)/*limit per page*/
         );
         $offset = ($request->query->getInt('page', 1) -1) * $request->query->getInt('number', 25);
 
-        return $this->render('admin/verbs.html.twig', ['pagination' => $pagination, 'offset' => $offset]);
+        return $this->render($twig, ['pagination' => $pagination, 'offset' => $offset]);
+
     }
 
+
+    
     /**
      * @Route("/admin/verb/{id?}", name="admin_verb")
      */
     public function verb(Request $request,Verb $verb = null)
     {
-        $form = $this->createForm(VerbType::class, $verb);
+        if($verb == null) {
+            $verb = new Verb();
+            $verb->addLocalization(new VerbLocalization());
+            $verb->addTranslation(new VerbTranslation());
+        }
+        return $this->adminEdit(
+            $request, 
+            VerbType::class, 
+            Verb::class, 
+            'admin_verb', 
+            'admin_verbs', 
+            'admin/verb.html.twig',
+            $verb);
+    }
+    /**
+     * @Route("/admin/source/{id?}", name="admin_source")
+     */
+    public function source(Request $request,Source $source = null)
+    {
+        return $this->adminEdit(
+            $request, 
+            SourceType::class, 
+            Source::class, 
+            'admin_source',
+            'admin_sources', 
+            'admin/source.html.twig',
+            $source);
+    }
+
+    /**
+     * @Route("/admin/configuration/{id?}", name="admin_configuration")
+     */
+    public function configuration(Request $request,Configuration $configuration = null)
+    {
+        return $this->adminEdit(
+            $request, 
+            ConfigurationType::class, 
+            Configuration::class, 
+            'admin_conifguration',
+            'admin_configurations', 
+            'admin/configuration.html.twig',
+            $configuration);
+    }
+    public function adminEdit(Request $request,string $form, string $class, $redirect_to_single,$redirect_to_list, $twig, $editable = null)
+    {
+        $form = $this->createForm($form, $editable);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()) {
-                $verb = $form->getData();
-                $this->getDoctrine()->getManager()->persist($verb);
+                $data = $form->getData();
+                $this->getDoctrine()->getManager()->persist($data);
                 $this->getDoctrine()->getManager()->flush();
-                if(key_exists('save', $request->request->get('verb'))) {
+                if(key_exists('save', $request->request->get($form->getName()))) {
                     return $this->redirect($request->getUri());
-                } elseif(key_exists('save_return', $request->request->get('verb'))) {
-                    return $this->redirectToRoute('admin', $request->query->get('params', []));
+                } elseif(key_exists('save_return', $request->request->get($form->getName()))) {
+                    return $this->redirectToRoute($redirect_to_list, $request->query->get('params', []));
                 } else {
-                    $verbRepository = $this->getDoctrine()->getRepository(Verb::class);
+                    /** @var AdminRepositoryInterface $repository */
+                    $repository = $this->getDoctrine()->getRepository($class);
                     $params = $request->query->get('params', []);
                     $search = null;
                     $offset = $request->query->get('offset', 0);
@@ -84,12 +154,12 @@ class AdminController extends AbstractController
                     if (key_exists('page', $params)) {
                         $params['page'] = floor($offset / 25)+1;
                     }
-                    /** @var Query $verbsQuery */
-                    $verbsQuery = $verbRepository->getBackSearchQuery($search, $offset, 1);
-                    $result = $verbsQuery->getOneOrNullResult();
-                    return $this->redirectToRoute('admin_verb',
+                    /** @var Query $query */
+                    $query = $repository->getBackSearchQuery($search, $offset, 1);
+                    $result = $query->getOneOrNullResult();
+                    return $this->redirectToRoute($redirect_to_single,
                         [
-                            'id' => $result->getId(),
+                            'id' => $result['verb']->getId(),
                             'params' => $params,
                             'offset' => $offset +1
                         ]
@@ -97,37 +167,9 @@ class AdminController extends AbstractController
                 }
             }
         }
-        return $this->render('admin/verb.html.twig', [
+        return $this->render($twig, [
             'form' => $form->createView(),
         ]);
-    }
-
-
-    /**
-     * @Route("/admin/configuration", name="admin_configuration")
-     */
-    public function configurationEdit(Request $request, SessionInterface $session, TranslatorInterface $translator)
-    {
-        $configurationObject = $this->getDoctrine()->getRepository(Configuration::class)->findFirst();
-        $form = $this->createForm(ConfigurationType::class, $configurationObject);
-
-        if ($request->getMethod() === 'POST') {
-            $form->handleRequest($request);
-            if($form->isSubmitted() && $form->isValid()) {
-                $configuration = $form->getData();
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($configuration);
-                $em->flush();
-                $session->getFlashBag()->set('message', $translator->trans('app.configuration.saved'));
-                return $this->redirectToRoute('admin_configuration');
-            }
-        }
-
-        return $this->render('admin/configuration.html.twig', [
-            'form' => $form->createView()
-        ]);
-        
-
     }
 
 }

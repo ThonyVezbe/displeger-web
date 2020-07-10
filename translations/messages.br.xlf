@@ -29,13 +29,65 @@
         <source>app.amzer.da_zont</source>
         <target>Amzer da zont</target>
       </trans-unit>
+      <trans-unit id="HFAZ1hC" resname="app.amzer.da_zont_hir">
+        <source>app.amzer.da_zont_hir</source>
+        <target>Amzer da zont, stumm hir</target>
+      </trans-unit>
+      <trans-unit id="IAzEfvk" resname="app.amzer.da_zont_berr">
+        <source>app.amzer.da_zont_berr</source>
+        <target>Amzer da zont, stumm berr</target>
+      </trans-unit>
+      <trans-unit id="o5To6qe" resname="app.amzer.lechian_breman">
+        <source>app.amzer.lechian_breman</source>
+        <target>Amzer a-vremañ</target>
+      </trans-unit>
+      <trans-unit id="o.c5rP0" resname="app.amzer.lechian_tremenet">
+        <source>app.amzer.lechian_tremenet</source>
+        <target>Amzer dremenet</target>
+      </trans-unit>
+      <trans-unit id="ZkES5La" resname="app.amzer.boaz_breman">
+        <source>app.amzer.boaz_breman</source>
+        <target>Amzer a-vremañ</target>
+      </trans-unit>
+      <trans-unit id="fs_Gri9" resname="app.amzer.boaz_tremenet">
+        <source>app.amzer.boaz_tremenet</source>
+        <target>Amzer dremenet</target>
+      </trans-unit>
+      <trans-unit id="9jf.QOM" resname="app.time_category.diskleriañ">
+        <source>app.time_category.diskleriañ</source>
+        <target>Doare-diskleriañ</target>
+      </trans-unit>
+      <trans-unit id="vPN4upg" resname="app.time_category.divizout">
+        <source>app.time_category.divizout</source>
+        <target>Doare-divizout</target>
+      </trans-unit>
+      <trans-unit id="baY3TFT" resname="app.time_category.gourchemenn">
+        <source>app.time_category.gourchemenn</source>
+        <target>Doare-gourc'hemenn</target>
+      </trans-unit>
+      <trans-unit id="xPxl5Id" resname="app.time_category.diskleriañ_lechiañ">
+        <source>app.time_category.diskleriañ_lechiañ</source>
+        <target>Doare-diskleriañ - stumm lec'hiañ</target>
+      </trans-unit>
+      <trans-unit id="6PJXic9" resname="app.time_category.diskleriañ_boaz">
+        <source>app.time_category.diskleriañ_boaz</source>
+        <target>Doare-diskleriañ - stumm boaz</target>
+      </trans-unit>
       <trans-unit id="T5ilb9H" resname="app.amzer.gallus">
         <source>app.amzer.gallus</source>
-        <target>Doare divizout gallus</target>
+        <target>Gallus</target>
+      </trans-unit>
+      <trans-unit id="4gd2UWr" resname="app.amzer.gallus_hir">
+        <source>app.amzer.gallus_hir</source>
+        <target>Gallus - stumm hir</target>
+      </trans-unit>
+      <trans-unit id="VLiIei0" resname="app.amzer.gallus_berr">
+        <source>app.amzer.gallus_berr</source>
+        <target>Gallus - stumm berr</target>
       </trans-unit>
       <trans-unit id="PBznQAB" resname="app.amzer.dichallus">
         <source>app.amzer.dichallus</source>
-        <target>Doare divizout dic'hallus</target>
+        <target>Dic'hallus</target>
       </trans-unit>
       <trans-unit id="gdjmmRP" resname="app.amzer.kadarnaat">
         <source>app.amzer.kadarnaat</source>
@@ -83,7 +135,7 @@
       </trans-unit>
       <trans-unit id="s7c3Bcz" resname="app.missing_translation.notice">
         <source>app.missing_translation.notice</source>
-        <target>Chaous, mankout a ra un droidigezh deomp! Mard anavezit anezhi e c'hallit hor skoazellañ en ur gas deomp ur gemennadenn.</target>
+        <target>Chaous, mankout a ra un droidigezh c'hallek deomp! Mard anavezit anezhi e c'hallit hor skoazellañ en ur gas deomp ur gemennadenn.</target>
       </trans-unit>
       <trans-unit id="tzmVoeo" resname="app.form.contact.name">
         <source>app.form.contact.name</source>
@@ -133,22 +185,102 @@
         <source>app.form.verb.save_continue</source>
         <target>Enrollañ ha kenderc'hel</target>
       </trans-unit>
-      <trans-unit id="Iyae57W" resname="app.form.contact.default.translation_galleg">
-        <source>app.form.contact.default.translation_galleg</source>
+      <trans-unit id="4ROlEGX" resname="app.form.verb.localizations">
+        <source>app.form.verb.localizations</source>
+        <target>Lec'hiadurioù</target>
+      </trans-unit>
+      <trans-unit id="Es6dOsL" resname="app.form.verb.translations">
+        <source>app.form.verb.translations</source>
+        <target>Troidigezhioù</target>
+      </trans-unit>
+      <trans-unit id="4ngq2Cb" resname="app.form.verb.infinitive">
+        <source>app.form.verb.infinitive</source>
+        <target>Anv-verb</target>
+      </trans-unit>
+      <trans-unit id="izKXDq." resname="app.form.verb.base">
+        <source>app.form.verb.base</source>
+        <target>Pennrann</target>
+      </trans-unit>
+      <trans-unit id="W6jmB.2" resname="app.form.verb.sources">
+        <source>app.form.verb.sources</source>
+        <target>Mammennoù</target>
+      </trans-unit>
+      <trans-unit id="A5OSCB4" resname="app.form.verb.dialect_code">
+        <source>app.form.verb.dialect_code</source>
+        <target>Rannyezh (diret)</target>
+      </trans-unit>
+      <trans-unit id="AEYBWa." resname="app.form.verb.language_code">
+        <source>app.form.verb.language_code</source>
+        <target>Yezh</target>
+      </trans-unit>
+      <trans-unit id="vh7vonG" resname="app.form.verb.translation">
+        <source>app.form.verb.translation</source>
+        <target>Troidigezh</target>
+      </trans-unit>
+      <trans-unit id="8zNUEDA" resname="app.form.source.code">
+        <source>app.form.source.code</source>
+        <target>Bonneg</target>
+      </trans-unit>
+      <trans-unit id="bErPtKz" resname="app.form.source.translations">
+        <source>app.form.source.translations</source>
+        <target>Troidigezhioù</target>
+      </trans-unit>
+      <trans-unit id="W_2k4VK" resname="app.form.source.label">
+        <source>app.form.source.label</source>
+        <target>Anv</target>
+      </trans-unit>
+      <trans-unit id="n3XN8Rn" resname="app.form.source.description">
+        <source>app.form.source.description</source>
+        <target>Deskrivadur</target>
+      </trans-unit>
+      <trans-unit id="pXQA4XF" resname="app.form.source.type">
+        <source>app.form.source.type</source>
+        <target>Doare</target>
+      </trans-unit>
+      <trans-unit id="5JCwPVG" resname="app.form.source.locale">
+        <source>app.form.source.locale</source>
+        <target>Yezh</target>
+      </trans-unit>
+      <trans-unit id="jdAgJ4F" resname="app.form.source.url">
+        <source>app.form.source.url</source>
+        <target>URL</target>
+      </trans-unit>
+      <trans-unit id="OXA1Xnf" resname="app.form.source.url.help">
+        <source>app.form.source.url.help</source>
+        <target>Laoskit goullo ma n'eo ket ul lec'hienn</target>
+      </trans-unit>
+      <trans-unit id="yrbtyyz" resname="app.form.source.active">
+        <source>app.form.source.active</source>
+        <target>Diskouez war bajenn ar mammennoù</target>
+      </trans-unit>
+      <trans-unit id="FiYcqzv" resname="app.source.type.grammar">
+        <source>app.source.type.grammar</source>
+        <target>Yezhadur</target>
+      </trans-unit>
+      <trans-unit id=".69HyCB" resname="app.source.type.traduction">
+        <source>app.source.type.traduction</source>
+        <target>Troidigezh</target>
+      </trans-unit>
+      <trans-unit id="tF8ytn6" resname="app.source.type.traduction.fr">
+        <source>app.source.type.traduction.fr</source>
+        <target>Troidigezh e galleg</target>
+      </trans-unit>
+      <trans-unit id="2CpGFmH" resname="app.source.type.traduction.en">
+        <source>app.source.type.traduction.en</source>
+        <target>Troidigezh e soazneg</target>
+      </trans-unit>
+      <trans-unit id="Akd1OXK" resname="app.source.type.verb">
+        <source>app.source.type.verb</source>
+        <target>Verboù</target>
+      </trans-unit>
+      <trans-unit id="TDXevYT" resname="app.form.source.language_code">
+        <source>app.form.source.language_code</source>
+        <target>Yezh</target>
+      </trans-unit>
+      <trans-unit id="rq9ZIs8" resname="app.form.contact.default.translation_missing">
+        <source>app.form.contact.default.translation_missing</source>
         <target>Demat deoc'h,
 Evit ar verb "%verb%" e vank un droidigezh c'hallek.
-Kinnig a ran deoc'h lakaat :</target>
-      </trans-unit>
-      <trans-unit id="dQtAQNJ" resname="app.form.contact.default.translation_saozneg">
-        <source>app.form.contact.default.translation_saozneg</source>
-        <target>Demat deoc'h,
-Evit ar verb "%verb%" e vank un droidigezh saoznek.
-Kinnig a ran deoc'h lakaat :</target>
-      </trans-unit>
-      <trans-unit id="HTru6jL" resname="app.form.contact.default.translation_both">
-        <source>app.form.contact.default.translation_both</source>
-        <target>Demat deoc'h,
-Evit ar verb "%verb%" e vank an troidigezhioù e galleg hag e saozneg.
 Kinnig a ran deoc'h lakaat :</target>
       </trans-unit>
       <trans-unit id="aRmbN1f" resname="app.form.contact.default.verb">
@@ -174,7 +306,7 @@ Mankout a ra ar verb "%verb%" war al lec'hienn.</target>
       </trans-unit>
       <trans-unit id="g8JD8uC" resname="app.search.advanced">
         <source>app.search.advanced</source>
-        <target>Klask kemplezhoc'h</target>
+        <target>Klask araoket</target>
       </trans-unit>
       <trans-unit id="zrFahLZ" resname="app.home">
         <source>app.home</source>
@@ -232,6 +364,26 @@ Mankout a ra ar verb "%verb%" war al lec'hienn.</target>
         <source>app.wiktionnary.conjugation</source>
         <target>Displegadur</target>
       </trans-unit>
+      <trans-unit id="plc0R6e" resname="app.report_error.notice">
+        <source>app.report_error.notice</source>
+        <target>Danevellañ ur fazi</target>
+      </trans-unit>
+      <trans-unit id="bAgV.gC" resname="app.form.contact.report_error.translation">
+        <source>app.form.contact.report_error.translation</source>
+        <target>Demat, fellout a ra din danevellañ ur fazi war ar bajenn verb %verb%: ...</target>
+      </trans-unit>
+      <trans-unit id="nfzBrUo" resname="app.form.contact.email.placeholder">
+        <source>app.form.contact.email.placeholder</source>
+        <target>yann@gov.bzh</target>
+      </trans-unit>
+      <trans-unit id="qpcmlZC" resname="app.form.contact.name.placeholder">
+        <source>app.form.contact.name.placeholder</source>
+        <target>Yann ar Gov</target>
+      </trans-unit>
+      <trans-unit id="Vplte.V" resname="app.form.contact.default.message">
+        <source>app.form.contact.default.message</source>
+        <target>Demat, fellout a ra din mont e darempred ganeoc'h evit ...</target>
+      </trans-unit>
       <trans-unit id="c6orvDZ" resname="app.button.export">
         <source>app.button.export</source>
         <target>Ezporzhiañ e PDF</target>
@@ -239,6 +391,206 @@ Mankout a ra ar verb "%verb%" war al lec'hienn.</target>
       <trans-unit id="wZ7F4mt" resname="app.button.print">
         <source>app.button.print</source>
         <target>Moullañ</target>
+      </trans-unit>
+      <trans-unit id="QTUabQP" resname="app.button.report">
+        <source>app.button.report</source>
+        <target>Danevellañ ur fazi</target>
+      </trans-unit>
+      <trans-unit id="4Rgx8OE" resname="app.header.search.button">
+        <source>app.header.search.button</source>
+        <target>Klask</target>
+      </trans-unit>
+      <trans-unit id="VXqMm0w" resname="app.admin.source.create.title">
+        <source>app.admin.source.create.title</source>
+        <target>Krouiñ ur vammenn</target>
+      </trans-unit>
+      <trans-unit id="t8B2K_Y" resname="app.admin.source.edit.title">
+        <source>app.admin.source.edit.title</source>
+        <target>Kemmañ ur vammenn</target>
+      </trans-unit>
+      <trans-unit id="SOo0Sxy" resname="app.admin.verb.create.title">
+        <source>app.admin.verb.create.title</source>
+        <target>Krouiñ ur verb</target>
+      </trans-unit>
+      <trans-unit id="Ho5ycNZ" resname="app.admin.verb.edit.title">
+        <source>app.admin.verb.edit.title</source>
+        <target>Kemmañ ur verb</target>
+      </trans-unit>
+      <trans-unit id="f70H45G" resname="global.gallo">
+        <source>global.gallo</source>
+        <target>Gallaoueg</target>
+      </trans-unit>
+      <trans-unit id="8R3kwUH" resname="app.dialect.kerne">
+        <source>app.dialect.kerne</source>
+        <target>Kerneveg</target>
+      </trans-unit>
+      <trans-unit id="dRj1_09" resname="app.dialect.leon">
+        <source>app.dialect.leon</source>
+        <target>Leoneg</target>
+      </trans-unit>
+      <trans-unit id="ZdD7Zd3" resname="app.dialect.treger">
+        <source>app.dialect.treger</source>
+        <target>Tregerieg</target>
+      </trans-unit>
+      <trans-unit id="TF9joci" resname="app.dialect.gwened">
+        <source>app.dialect.gwened</source>
+        <target>Gwenedeg</target>
+      </trans-unit>
+      <trans-unit id="WQ77eab" resname="app.dialect.goelo">
+        <source>app.dialect.goelo</source>
+        <target>Goueloù</target>
+      </trans-unit>
+      <trans-unit id="MDzUI0u" resname="app.dialect.reolad">
+        <source>app.dialect.reolad</source>
+        <target>Reolad</target>
+      </trans-unit>
+      <trans-unit id="O8JcWGW" resname="app.geriafurch.alt">
+        <source>app.geriafurch.alt</source>
+        <target>Geriafurch.alt</target>
+      </trans-unit>
+      <trans-unit id="UnfOmys" resname="app.geriafurch">
+        <source>app.geriafurch</source>
+        <target>Geriafurch</target>
+      </trans-unit>
+      <trans-unit id="RtLOZCs" resname="app.category.d1">
+        <source>app.category.d1</source>
+        <target>Verb reizh</target>
+      </trans-unit>
+      <trans-unit id="bZkRDMi" resname="app.category.d2">
+        <source>app.category.d2</source>
+        <target>Verb gant ur pennrann e -a, -o, -eu</target>
+      </trans-unit>
+      <trans-unit id="BWZ1rv0" resname="app.category.d3">
+        <source>app.category.d3</source>
+        <target>Verb e -a</target>
+      </trans-unit>
+      <trans-unit id="BcsDta3" resname="app.category.d4">
+        <source>app.category.d4</source>
+        <target>Verb e -iañ</target>
+      </trans-unit>
+      <trans-unit id="h5hybfB" resname="app.category.d5">
+        <source>app.category.d5</source>
+        <target>Verb e -liañ</target>
+      </trans-unit>
+      <trans-unit id="DPSCftD" resname="app.category.d6">
+        <source>app.category.d6</source>
+        <target>Verb e -niañ</target>
+      </trans-unit>
+      <trans-unit id="DHhM3kS" resname="app.category.d7">
+        <source>app.category.d7</source>
+        <target>Verb derevet eus "Ober"</target>
+      </trans-unit>
+      <trans-unit id="D3biWbN" resname="app.category.dont">
+        <source>app.category.dont</source>
+        <target>Dont</target>
+      </trans-unit>
+      <trans-unit id="Uj6jnJ5" resname="app.category.gouzout">
+        <source>app.category.gouzout</source>
+        <target>Gouzout</target>
+      </trans-unit>
+      <trans-unit id="wpg5z3F" resname="app.category.bezan">
+        <source>app.category.bezan</source>
+        <target>Bezañ</target>
+      </trans-unit>
+      <trans-unit id="JQRupym" resname="app.category.kaout">
+        <source>app.category.kaout</source>
+        <target>Kaout</target>
+      </trans-unit>
+      <trans-unit id="qNH3zaZ" resname="app.category.mont">
+        <source>app.category.mont</source>
+        <target>Mont</target>
+      </trans-unit>
+      <trans-unit id="VwokZ0E" resname="app.gour.U1.symbol">
+        <source>app.gour.U1.symbol</source>
+        <target>U1</target>
+      </trans-unit>
+      <trans-unit id="JQuJLEa" resname="app.gour.U2.symbol">
+        <source>app.gour.U2.symbol</source>
+        <target>U2</target>
+      </trans-unit>
+      <trans-unit id="qATMamv" resname="app.gour.U3.symbol">
+        <source>app.gour.U3.symbol</source>
+        <target>U3</target>
+      </trans-unit>
+      <trans-unit id="LUXUzQS" resname="app.gour.L1.symbol">
+        <source>app.gour.L1.symbol</source>
+        <target>L1</target>
+      </trans-unit>
+      <trans-unit id="Ux2dugh" resname="app.gour.L2.symbol">
+        <source>app.gour.L2.symbol</source>
+        <target>L2</target>
+      </trans-unit>
+      <trans-unit id="ELn1TBT" resname="app.gour.L3.symbol">
+        <source>app.gour.L3.symbol</source>
+        <target>L3</target>
+      </trans-unit>
+      <trans-unit id="Pz6MZrr" resname="app.gour.D.symbol">
+        <source>app.gour.D.symbol</source>
+        <target>D</target>
+      </trans-unit>
+      <trans-unit id="7swrT8u" resname="app.verb.view_more">
+        <source>app.verb.view_more</source>
+        <target>Muioc'h a yezhoù</target>
+      </trans-unit>
+      <trans-unit id="I0qZ5tR" resname="app.verb.other_forms">
+        <source>app.verb.other_forms</source>
+        <target>Stummoù all</target>
+      </trans-unit>
+      <trans-unit id="DesWvMt" resname="app.copy.tense">
+        <source>app.copy.tense</source>
+        <target>Eilañ an amzer-mañ</target>
+      </trans-unit>
+      <trans-unit id="N.k3Ndy" resname="app.copy.form">
+        <source>app.copy.form</source>
+        <target>Eilañ ar stumm verb-mañ</target>
+      </trans-unit>
+      <trans-unit id="sQE4aYk" resname="app.message.copy.success">
+        <source>app.message.copy.success</source>
+        <target>Eilet eo bet ar verb displeget er golver!</target>
+      </trans-unit>
+      <trans-unit id="Y__DXvr" resname="app.message.copy.error">
+        <source>app.message.copy.error</source>
+        <target>Fazi en ur eilañ ar verb displeget er golver.</target>
+      </trans-unit>
+      <trans-unit id="e_85FyD" resname="app.message.email.success">
+        <source>app.message.email.success</source>
+        <target>Kaset eo bet ar gemennadenn gant berzh!</target>
+      </trans-unit>
+      <trans-unit id="nf_l7.9" resname="app.message.email.error">
+        <source>app.message.email.error</source>
+        <target>Degouezhet ez eus bet ur fazi en ur gas ar gemennadenn, klaskit en-dro mar plij.</target>
+      </trans-unit>
+      <trans-unit id="bSWqAzf" resname="app.sources.title">
+        <source>app.sources.title</source>
+        <target>Mammennoù:</target>
+      </trans-unit>
+      <trans-unit id="PCpcKwJ" resname="app.page.sources">
+        <source>app.page.sources</source>
+        <target>Mammennoù</target>
+      </trans-unit>
+      <trans-unit id="HzXEzV6" resname="app.page.yezhadur">
+        <source>app.page.yezhadur</source>
+        <target>Kentel yezhadur</target>
+      </trans-unit>
+      <trans-unit id="ZSnKs6h" resname="app.source_code">
+        <source>app.source_code</source>
+        <target>Boneg tarzh</target>
+      </trans-unit>
+      <trans-unit id="gV0kdCS" resname="app.form.search.term">
+        <source>app.form.search.term</source>
+        <target>Termen klasket</target>
+      </trans-unit>
+      <trans-unit id=".mQqWei" resname="app.form.search.language_code">
+        <source>app.form.search.language_code</source>
+        <target>Yezh</target>
+      </trans-unit>
+      <trans-unit id="DhjQNwG" resname="app.email.error">
+        <source>app.email.error</source>
+        <target>__app.email.error</target>
+      </trans-unit>
+      <trans-unit id="LFE8SfI" resname="app.email.sent">
+        <source>app.email.sent</source>
+        <target>__app.email.sent</target>
       </trans-unit>
     </body>
   </file>

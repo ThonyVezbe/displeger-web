@@ -24,12 +24,12 @@ class ConfigurationTranslation
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $intro;
+    private $text;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $thanks;
+    private $title;
 
     /**
      * @var Configuration
@@ -55,25 +55,26 @@ class ConfigurationTranslation
         return $this;
     }
 
-    public function getIntro(): ?string
+    public function getText(): ?string
     {
-        return $this->intro;
+        return $this->text;
     }
 
-    public function setIntro(?string $intro): self
+    public function setText(?string $text): self
     {
-        $this->intro = $intro;
+        $this->text = $text;
 
         return $this;
     }
-    public function getThanks(): ?string
+
+    public function getTitle(): ?string
     {
-        return $this->thanks;
+        return $this->title;
     }
 
-    public function setThanks(?string $thanks): self
+    public function setTitle(?string $title): self
     {
-        $this->thanks = $thanks;
+        $this->title = $title;
 
         return $this;
     }

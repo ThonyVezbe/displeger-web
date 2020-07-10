@@ -10,6 +10,16 @@ Encore
     .copyFiles({
         from: './assets/img',
     })
+    .copyFiles({
+        from: './assets/fonts',
+    })
+    .copyFiles(
+    {
+        from: './node_modules/tinymce/skins/',
+        to: './skins/[path][name].[ext]',
+        includeSubdirectories: true,
+        pattern: /.*/
+    })
     /*
      * ENTRY CONFIG
      *
@@ -21,6 +31,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('chart', './assets/js/chart.js')
+    .addEntry('admin', './assets/js/admin.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // will require an extra script tag for runtime.js

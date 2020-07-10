@@ -24,6 +24,12 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Entity\Configuration;
+use App\Entity\Source;
+use App\Entity\SourceTypeEnum;
+use App\Entity\VerbLocalization;
+use App\Entity\VerbTranslation;
+use App\Form\AdvancedSearchType;
+use App\Repository\ConfigurationTranslationRepository;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class MainController extends AbstractController
@@ -75,19 +81,7 @@ class MainController extends AbstractController
             return $this->redirectToRoute('verb', ['anvVerb' => $request->query->get('verb')]);
         }
 
-        $intro = '';
-        /** @var Configuration $config */
-        $config = $this->getDoctrine()->getRepository(Configuration::class)->findFirst();
-        if($config) {
-            $configTranslation = $config->getTranslation($request->get('_locale', 'br'));
-            if($configTranslation) {
-                $intro = $configTranslation->getIntro();
-            }
-        }
-
-        return $this->render('main/index.html.twig', [
-            'intro' => $intro
-        ]);
+        return $this->render('main/index.html.twig');
     }
 
     /**
@@ -98,8 +92,9 @@ class MainController extends AbstractController
         if ( null === $term ) {
             return $this->redirectToRoute('main');  
         }
-        $verbRepository = $this->getDoctrine()->getRepository(Verb::class);
-        $searchQuery = $verbRepository->getFrontSearchQuery($term);
+        /** @var VerbLocalizationRepository $verbRepository */
+        $verbLocalizationRepository = $this->getDoctrine()->getRepository(VerbLocalization::class);
+        $searchQuery = $verbLocalizationRepository->getFrontSearchQuery($term);
         
         $pagination = $knpPaginator->paginate(
             $searchQuery,
@@ -109,9 +104,9 @@ class MainController extends AbstractController
 
         if($pagination->getTotalItemCount() <= 1) {
             if($pagination->getTotalItemCount() === 1) {
-                $term = $pagination->getItems()[0]->getAnvVerb();
+                $term = $pagination->getItems()[0]->getInfinitive();
             }
-            return $this->redirectToRoute('verb', ['anvVerb' => $term]);
+            return $this->redirectToRoute('verb', ['infinitive' => $term]);
         }
 
         return $this->render('main/search.html.twig', [
@@ -123,92 +118,145 @@ class MainController extends AbstractController
      * @Route("/{_locale}/search_advanced", name="search_advanced")
      */
     public function searchAdvanced(Request $request, PaginatorInterface $knpPaginator) {
-        $term = $request->query->get('term', null);
-
-        /** @var erbRepository VerbRepository */
-        $verbRepository = $this->getDoctrine()->getRepository(Verb::class);
-        $searchQuery = $verbRepository->getFrontSearchQuery($term);
         
-        $pagination = $knpPaginator->paginate(
-            $searchQuery,
-            $request->query->getInt('page', 1)/*page number*/,
-            $request->query->getInt('number', 25)/*limit per page*/
+        $form = $this->createForm(AdvancedSearchType::class, 
+            [
+                'term_advanced' => $request->query->get('term_advanced', null),
+                'language' => $request->query->get('language', null),
+                'conjugated' => $request->query->get('conjugated', null)
+            ]
         );
 
-        return $this->render('main/search_advanced.html.twig', [
-            'pagination' => $pagination
-        ]);
+        if ($request->query->has('term_advanced')) {
+            /** @var verbRepository VerbRepository */
+            $searchQuery = null;
+            $type = 'localization';
+            $term = $request->query->get('term_advanced');
+            if($request->query->get('language') == 'br') {
+                $verbRepository = $this->getDoctrine()->getRepository(VerbLocalization::class);
+                $searchQuery = $verbRepository->getFrontSearchQuery($term);
+            } else {
+                $type = 'translation';
+                $verbRepository = $this->getDoctrine()->getRepository(VerbTranslation::class);
+                $searchQuery = $verbRepository->getFrontSearchQuery($term, $request->query->get('language'));
+            }
+            
+            $pagination = $knpPaginator->paginate(
+                $searchQuery,
+                $request->query->getInt('page', 1)/*page number*/,
+                $request->query->getInt('number', 25)/*limit per page*/
+            );
+
+            return $this->render('main/search_advanced.html.twig', [
+                'pagination' => $pagination,
+                'form' => $form->createView(),
+                'type' => $type,
+                'term' => $term
+            ]);
+        } else {
+            return $this->render('main/search_advanced.html.twig', [
+                'form' => $form->createView()
+            ]);
+        }
     }
 
 
     /**
-     * @Route("/{_locale}/verb/{anvVerb}", name="verb", defaults={"print" : false})
-     * @Entity("verb", expr="repository.findOneByAnvVerb(anvVerb)")
+     * @Route("/{_locale}/verb/{infinitive}", name="verb", defaults={"print" : false})
+     * @Entity("VerbLocalization", expr="repository.findOneByInfinitive(infinitive)")
      */
-    public function verb(Request $request,Verb $verb = null, LoggerInterface $logger, Pdf $pdf)
+    public function verb(Request $request,VerbLocalization $verbLocalization = null, LoggerInterface $logger, Pdf $pdf)
     {
         $contactForm = $this->createForm(ContactType::class);
-        $viewName = 'main/verb.html.twig';
+        $reportErrorForm = $this->createForm(ContactType::class);
+        $template = 'main/verb.html.twig';
 
         $print = $request->query->get('print', false);
 
         if($print) {
-            $viewName = 'main/verb.print.html.twig';
+            $template = 'main/verb.print.html.twig';
         }
 
-        if(null !== $verb) {
+        if(null !== $verbLocalization) {
+            $verb = $verbLocalization->getVerb();
+
+            /** @var verbLocalizationRepository VerbLocalizationRepository */
+            $verbLocalizationRepository = $this->getDoctrine()->getRepository(VerbLocalization::class);
+            $previousVerb = $verbLocalizationRepository->getPreviousVerb($verbLocalization->getInfinitive());
+            $nextVerb = $verbLocalizationRepository->getNextVerb($verbLocalization->getInfinitive());
             $locale = $request->get('_locale', 'br');
-            $verbEndings = $this->verbouManager->getEndings($verb->getCategory());
-            $anvGwan = $verbEndings['gwan'];
-            unset($verbEndings['gwan']);
-            unset($verbEndings['nach']);
-            $mutatedBase = $this->kemmaduriouManager->mutateWord($verb->getPennrann(), KemmaduriouManager::BLOTAAT);
+            $verbEndings = $this->verbouManager->getEndings($verbLocalization->getCategory(), $verbLocalization->getDialectCode());
+            // if(in_array($verbLocalization->getInfinitive(), ['bezañ', 'boud'])) {
+            //     $template = 'main/irregular/bezan.html.twig';
+            // }
+            $anvGwan = $verbEndings['standard']['gwan'];
+            unset($verbEndings['standard']['gwan']);
+            unset($verbEndings['standard']['nach']);
+            // $mutatedBase = $this->kemmaduriouManager->mutateWord($verbLocalization->getBase(), KemmaduriouManager::BLOTAAT);
             $nach = [];
-            foreach($verbEndings['kadarnaat'] as $ending) {
-                if(count($ending) > 0) {
-                    $nach[] = 'na '.$mutatedBase.'<strong>'.$ending[0].'</strong> ket';
-                } else {
-                    $nach[] = null;
-                }
+            // foreach($verbEndings['kadarnaat'] as $ending) {
+            //     if(count($ending) > 0) {
+            //         $nach[] = 'na '.$mutatedBase.'<strong>'.$ending[0].'</strong> ket';
+            //     } else {
+            //         $nach[] = null;
+            //     }
+            // }
+
+            $wikeriadurUrl = $this->getParameter('url_wikeriadur')[$locale].$verbLocalization->getInfinitive();
+            $geriafurchUrl = '';
+            if(isset($this->getParameter('url_geriafurch')[$locale])) {
+                $geriafurchUrl = $this->getParameter('url_geriafurch')[$locale].$verbLocalization->getInfinitive();
+            } else {
+                $geriafurchUrl = $this->getParameter('url_geriafurch')['br'].$verbLocalization->getInfinitive();
+            }
+            $organisation = $this->getParameter('organisation');
+            if( null != $this->get('parameter_bag')->has('organisation.'.$verbLocalization->getInfinitive())) {
+                $organisation = $this->getParameter('organisation.'.$verbLocalization->getInfinitive());
             }
 
-            $wikeriadurUrl = $this->getParameter('url_wikeriadur')[$locale].$verb->getAnvVerb();
-            $wikeriadurConjugationUrl = $this->getParameter('url_wikeriadur_conjugation')[$locale].$verb->getAnvVerb();
-
+            $wikeriadurConjugationUrl = $this->getParameter('url_wikeriadur_conjugation')[$locale].$verbLocalization->getInfinitive();
             if($print){
-                if(!file_exists(self::PDF_DIR.$verb->getAnvVerb() . '.pdf')) {
+                if(!file_exists(self::PDF_DIR.$verbLocalization->getInfinitive() . '.pdf')) {
                     $html = $this->renderView(
-                        $viewName,
+                        $template,
                         array(
                             'verb' => $verb,
+                            'verbLocalization' => $verbLocalization,
                             'verbEndings' => $verbEndings,
-                            'anvGwan' => $anvGwan,
+                            'anvGwasn' => $anvGwan,
                             'nach' => $nach,
                             'contactForm' => $contactForm->createView(),
                             'print' => $print,
-                            'anvVerb' => $verb->getAnvVerb()
+                            'anvVerb' => $verbLocalization->getInfinitive()
                         )
                     );
                     //TODO will hog the disk in the public folder, maybe we could clean it after. or keep it for cache ?
-                    $pdf->generateFromHtml($html, self::PDF_DIR.$verb->getAnvVerb() . '.pdf', [], true);
+                    $pdf->generateFromHtml($html, self::PDF_DIR.$verbLocalization->getInfinitive() . '.pdf', [], true);
                 }
-                return new BinaryFileResponse(self::PDF_DIR.$verb->getAnvVerb() . '.pdf');
+                return new BinaryFileResponse(self::PDF_DIR.$verbLocalization->getInfinitive() . '.pdf');
 
             } else {
-                return $this->render($viewName, [
+                return $this->render($template, [
                     'verb' => $verb,
-                    'verbEndings' => $verbEndings,
+                    'verbLocalization' => $verbLocalization,
+                    'verbEndings' => $verbEndings['standard'],
+                    'localizedVerbEndings' => $verbEndings['localized'],
                     'anvGwan' => $anvGwan,
                     'nach' => $nach,
                     'contactForm' => $contactForm->createView(),
+                    'reportErrorForm' => $reportErrorForm->createView(),
                     'print' => $print,
                     'wikeriadur_url' => $wikeriadurUrl,
+                    'geriafurch_url' => $geriafurchUrl,
+                    'organisation' => $organisation,
                     'wikeriadur_conjugation_url' => $wikeriadurConjugationUrl,
+                    'previousVerb' => $previousVerb,
+                    'nextVerb' => $nextVerb
                 ]);
             }
         }
 
-        $searchTerm = $request->attributes->get('anvVerb');
+        $searchTerm = $request->attributes->get('infinitive');
         return $this->render('main/error.html.twig', [
             'verb' => $searchTerm,
             'contactForm' => $contactForm->createView()
@@ -224,16 +272,17 @@ class MainController extends AbstractController
         if (null === $term) {
             return new JsonResponse();
         }
-        $verbRepository = $this->getDoctrine()->getRepository(Verb::class);
-        $result = $verbRepository->findByTermAutocomplete($term);
+        /** @var VerbLocalizationRepository $verbLocalizationRepository */
+        $verbLocalizationRepository = $this->getDoctrine()->getRepository(VerbLocalization::class);
+        $result = $verbLocalizationRepository->findByTermAutocomplete($term);
         $array = [];
         /** @var Verb $res */
         for ($i = 0; $i < min(5, count($result)); $i++) {
             $res = $result[$i];
-            $array[] = ['value' => $router->generate('verb', ['anvVerb' => $res->getAnvVerb()]), 'label' => $res->getAnvVerb()];
+            $array[] = ['value' => $router->generate('verb', ['infinitive' => $res->getInfinitive()]), 'label' => $res->getInfinitive()];
         }
         if(count($result) > 5) {
-            $array[] = ['value' => $router->generate('search', ['term' => $term]), 'label' => $translator->trans    ('app.autocomplete.more')];
+            $array[] = ['value' => $router->generate('search', ['term' => $term]), 'label' => $translator->trans('app.autocomplete.more')];
         }
         return new JsonResponse($array);
     }
@@ -274,7 +323,7 @@ class MainController extends AbstractController
                     $session->getFlashBag()->set('message', $translator->trans('app.email.error'));
 
                     return $this->render('main/email.html.twig', [
-                        'contactForm' => $contactForm->createView()
+                        'form_object' => $contactForm->createView()
                     ]);
                 } else {
                     /** SessionInterface $session */
@@ -286,14 +335,14 @@ class MainController extends AbstractController
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(['result' => 'nok', 'errors' => $contactForm->getErrors(true)]);
             } else {
-                return $this->render('email.html.twig', [
-                    'contactForm' => $contactForm->createView() 
+                return $this->render('main/email.html.twig', [
+                    'form_object' => $contactForm->createView()
                 ]);
             }
         } else {
             
             return $this->render('main/email.html.twig', [
-                'contactForm' => $contactForm->createView()
+                'form_object' => $contactForm->createView()
             ]);
         }
     }
@@ -308,19 +357,58 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/thanks", name="thanks", requirements= {
+     * @Route("/{_locale}/sources", name="sources", requirements= {
      *      "_locale": "br|fr|en"
      * })
      */
-    public function thanks(Request $request) {
-         /** @var Configuration $config */
-         $config = $this->getDoctrine()->getRepository(Configuration::class)->findFirst();
-         if($config) {
-             $configTranslation = $config->getTranslation($request->get('_locale', 'br'));
-             if($configTranslation) {
-                 $thanks = $configTranslation->getThanks();
-             }
-         }
-        return $this->render('misc/thanks.html.twig', ['thanks' => $thanks]);
+    public function sources() {
+        $sourceRepo = $this->getDoctrine()->getRepository(Source::class);
+        $sourceEntities = $sourceRepo->findBy(['active'=>true]);
+        $sources = [
+            SourceTypeEnum::GRAMMAR => [],
+            SourceTypeEnum::VERB => [],
+            SourceTypeEnum::TRADUCTION => [],
+        ];
+        /** @var $sourceEntity Source */
+        foreach($sourceEntities as $sourceEntity) {
+            if(SourceTypeEnum::TRADUCTION === $sourceEntity->getType()) {
+                $sources[$sourceEntity->getType()][$sourceEntity->getLocale()][] = $sourceEntity;
+            } elseif (null !== $sourceEntity->getType()) {
+                $sources[$sourceEntity->getType()][] = $sourceEntity;
+            }
+        }
+        return $this->render('misc/sources.html.twig', ['sources' => $sources]);
+    }
+
+    /**
+     * @Route("/{_locale}/page/{code}", name="page", requirements= {
+     *      "_locale": "br|fr|en"
+     * })
+     */
+    public function CMSPage(
+        Request $request, 
+        $code, 
+        ConfigurationTranslationRepository $configurationTranslationRepository) {
+        /** @var ConfigurationTranslation $configurationTranslation  */
+        $configurationTranslation = $configurationTranslationRepository->findByCodeAndLocale($code, $request->getLocale());
+        
+        return $this->render('misc/cms.html.twig', ['configurationTranslation' => $configurationTranslation]);
+    }
+
+    /**
+     * @Route("/{_locale}/random", name="random", requirements= {
+     *      "_locale": "br|fr|en"
+     * })
+     */
+    public function randomVerb(){
+        $verb = $this->getDoctrine()->getRepository(VerbLocalization::class)->findRandomVerb();
+        $route = 'main';
+        $args = null;
+        if($verb != null){
+            $route = 'verb';
+            $args = ['infinitive' => $verb->getInfinitive()];
+        }
+
+        return $this->redirectToRoute($route, $args);
     }
 }

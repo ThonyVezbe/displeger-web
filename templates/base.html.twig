@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +15,13 @@
             crossorigin="anonymous"
             />
     </head>
+    <script>
+        // makes sure the switch is on when we change pages with the dark mode
+        // we put it here so it doesn't "blink" when the user change pages
+        if(localStorage.getItem('theme') === 'dark'){
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
     <body>
         {% block body %}
 
@@ -43,6 +50,11 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
-        <div class="message"></div>
+        <div class="message"
+        data-copy-success="{{'app.message.copy.success'|trans}}"
+        data-copy-error="{{'app.message.copy.error'|trans}}"
+        data-email-success="{{'app.message.email.success'|trans}}"
+        data-email-error="{{'app.message.email.error'|trans}}"
+        ></div>
     </body>
 </html>

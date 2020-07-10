@@ -1,0 +1,67 @@
+parameters:
+  categories:
+    - d1
+    - d2
+    - d3
+    - d4
+    - d5
+    - d6
+    - d7
+    - dont
+    - gouzout
+    - mont
+    - bezan
+    - kaout
+
+  organisation:
+    diskleriañ:
+        - bremañ
+        - tremenet_ledan
+        - tremenet_strizh
+        - da_zont
+    divizout:
+        - gallus
+        - dichallus
+    gourchemenn:
+        - kadarnaat
+        # - nach
+
+  organisation.bezañ:
+    diskleriañ:
+        - bremañ
+        - tremenet_ledan
+        - tremenet_strizh
+        - da_zont_berr
+        - da_zont_hir
+    diskleriañ_lechiañ:
+        - lechian_breman
+        - lechian_tremenet
+    diskleriañ_boaz:
+        - boaz_breman
+        - boaz_tremenet
+    divizout:
+        - gallus_hir
+        - gallus_berr
+        - dichallus
+    gourchemenn:
+        - kadarnaat
+        # - nach
+
+  
+  organisation.kaout:
+    diskleriañ:
+        - bremañ
+        - tremenet_ledan
+        - tremenet_strizh
+        - da_zont_berr
+        - da_zont_hir
+    diskleriañ_boaz:
+        - boaz_breman
+        - boaz_tremenet
+    divizout:
+        - gallus_hir
+        - gallus_berr
+        - dichallus
+    gourchemenn:
+        - kadarnaat
+        # - nach

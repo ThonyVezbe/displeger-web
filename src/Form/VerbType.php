@@ -3,31 +3,43 @@
 namespace App\Form;
 
 use App\Entity\Verb;
+use App\Util\ListsUtil;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class VerbType extends AbstractType
 {
+    /** @var ListsUtil $locales */
+    protected $listsUtil;
+
+    public function __construct(ListsUtil $listsUtil) 
+    {
+        $this->listsUtil = $listsUtil;
+    } 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('anvVerb', null, [
-                'label' => 'app.form.verb.anvVerb'
+            ->add('localizations', CollectionType::class, [
+                'label' => 'app.form.verb.localizations',
+                'entry_type' => VerbLocalizationType::class,
+                'allow_add' => true,
+                'prototype' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ])
-            ->add('pennrann', null, [
-                'label' => 'app.form.verb.pennrann'
+            ->add('translations', CollectionType::class, [
+                'label' => 'app.form.verb.translations',
+                'entry_type' => VerbTranslationType::class,
+                'allow_add' => true,
+                'prototype' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ])
-            ->add('category', null, [
-                'label' => 'app.form.verb.category'
-            ])
-            ->add('galleg', null, [
-                'label' => 'app.form.verb.galleg'
-            ])
-            ->add('saozneg', null, [
-                'label' => 'app.form.verb.saozneg'
-            ])->add('save', SubmitType::class, [
+            ->add('save', SubmitType::class, [
                 'label' => 'app.form.verb.save'
             ])
             ->add('save_return', SubmitType::class, [

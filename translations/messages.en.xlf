@@ -29,6 +29,50 @@
         <source>app.amzer.da_zont</source>
         <target>Future</target>
       </trans-unit>
+      <trans-unit id="HFAZ1hC" resname="app.amzer.da_zont_hir">
+        <source>app.amzer.da_zont_hir</source>
+        <target>Future, long form</target>
+      </trans-unit>
+      <trans-unit id="IAzEfvk" resname="app.amzer.da_zont_berr">
+        <source>app.amzer.da_zont_berr</source>
+        <target>Future, short form</target>
+      </trans-unit>
+      <trans-unit id="o5To6qe" resname="app.amzer.lechian_breman">
+        <source>app.amzer.lechian_breman</source>
+        <target>Present</target>
+      </trans-unit>
+      <trans-unit id="o.c5rP0" resname="app.amzer.lechian_tremenet">
+        <source>app.amzer.lechian_tremenet</source>
+        <target>Imperfect</target>
+      </trans-unit>
+      <trans-unit id="ZkES5La" resname="app.amzer.boaz_breman">
+        <source>app.amzer.boaz_breman</source>
+        <target>Present</target>
+      </trans-unit>
+      <trans-unit id="fs_Gri9" resname="app.amzer.boaz_tremenet">
+        <source>app.amzer.boaz_tremenet</source>
+        <target>Imperfect</target>
+      </trans-unit>
+      <trans-unit id="9jf.QOM" resname="app.time_category.diskleriañ">
+        <source>app.time_category.diskleriañ</source>
+        <target>Indicative</target>
+      </trans-unit>
+      <trans-unit id="vPN4upg" resname="app.time_category.divizout">
+        <source>app.time_category.divizout</source>
+        <target>Conditional</target>
+      </trans-unit>
+      <trans-unit id="baY3TFT" resname="app.time_category.gourchemenn">
+        <source>app.time_category.gourchemenn</source>
+        <target>Imperative</target>
+      </trans-unit>
+      <trans-unit id="xPxl5Id" resname="app.time_category.diskleriañ_lechiañ">
+        <source>app.time_category.diskleriañ_lechiañ</source>
+        <target>Indicative - localisation form</target>
+      </trans-unit>
+      <trans-unit id="6PJXic9" resname="app.time_category.diskleriañ_boaz">
+        <source>app.time_category.diskleriañ_boaz</source>
+        <target>Indicative - habit form</target>
+      </trans-unit>
       <trans-unit id="T5ilb9H" resname="app.amzer.gallus">
         <source>app.amzer.gallus</source>
         <target>Potential conditional (present)</target>
@@ -83,7 +127,7 @@
       </trans-unit>
       <trans-unit id="s7c3Bcz" resname="app.missing_translation.notice">
         <source>app.missing_translation.notice</source>
-        <target>Sadly, we don't have a translation for this verb. If you know it, you can help us by sending us a message.</target>
+        <target>Sadly, we don't have an english translation for this verb. If you know it, you can help us by sending us a message.</target>
       </trans-unit>
       <trans-unit id="tzmVoeo" resname="app.form.contact.name">
         <source>app.form.contact.name</source>
@@ -133,23 +177,11 @@
         <source>app.form.verb.save_continue</source>
         <target>Save and continue</target>
       </trans-unit>
-      <trans-unit id="Iyae57W" resname="app.form.contact.default.translation_galleg">
-        <source>app.form.contact.default.translation_galleg</source>
-        <target>Greetings,
-The french translation is missing for the verb "%verb%".
-I propose that you add the following translation:</target>
-      </trans-unit>
-      <trans-unit id="dQtAQNJ" resname="app.form.contact.default.translation_saozneg">
-        <source>app.form.contact.default.translation_saozneg</source>
+      <trans-unit id="rq9ZIs8" resname="app.form.contact.default.translation_missing">
+        <source>app.form.contact.default.translation_missing</source>
         <target>Greetings,
 The english translation is missing for the verb "%verb%".
 I propose that you add the following translation:</target>
-      </trans-unit>
-      <trans-unit id="HTru6jL" resname="app.form.contact.default.translation_both">
-        <source>app.form.contact.default.translation_both</source>
-        <target>Greetings,
-The english and french translation is missing for the verb "%verb%".
-I propose that you add the following translation</target>
       </trans-unit>
       <trans-unit id="aRmbN1f" resname="app.form.contact.default.verb">
         <source>app.form.contact.default.verb</source>
@@ -233,6 +265,26 @@ The verb "%verb%" is missing on the website.
         <source>app.wiktionnary.conjugation</source>
         <target>Conjugationn</target>
       </trans-unit>
+      <trans-unit id="plc0R6e" resname="app.report_error.notice">
+        <source>app.report_error.notice</source>
+        <target>Report an error</target>
+      </trans-unit>
+      <trans-unit id="bAgV.gC" resname="app.form.contact.report_error.translation">
+        <source>app.form.contact.report_error.translation</source>
+        <target>Hello, I would like to report an error on the page of the verb %verb%: ...</target>
+      </trans-unit>
+      <trans-unit id="nfzBrUo" resname="app.form.contact.email.placeholder">
+        <source>app.form.contact.email.placeholder</source>
+        <target>john@smith.net</target>
+      </trans-unit>
+      <trans-unit id="qpcmlZC" resname="app.form.contact.name.placeholder">
+        <source>app.form.contact.name.placeholder</source>
+        <target>John Smith</target>
+      </trans-unit>
+      <trans-unit id="Vplte.V" resname="app.form.contact.default.message">
+        <source>app.form.contact.default.message</source>
+        <target>Greetings, I wanted to contact you for ...</target>
+      </trans-unit>
       <trans-unit id="c6orvDZ" resname="app.button.export">
         <source>app.button.export</source>
         <target>PDF Export</target>
@@ -240,6 +292,178 @@ The verb "%verb%" is missing on the website.
       <trans-unit id="wZ7F4mt" resname="app.button.print">
         <source>app.button.print</source>
         <target>Print</target>
+      </trans-unit>
+      <trans-unit id="QTUabQP" resname="app.button.report">
+        <source>app.button.report</source>
+        <target>Report an error</target>
+      </trans-unit>
+      <trans-unit id="4Rgx8OE" resname="app.header.search.button">
+        <source>app.header.search.button</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="f70H45G" resname="global.gallo">
+        <source>global.gallo</source>
+        <target>Gallo</target>
+      </trans-unit>
+      <trans-unit id="8R3kwUH" resname="app.dialect.kerne">
+        <source>app.dialect.kerne</source>
+        <target>Kerneveg</target>
+      </trans-unit>
+      <trans-unit id="dRj1_09" resname="app.dialect.leon">
+        <source>app.dialect.leon</source>
+        <target>Leoneg</target>
+      </trans-unit>
+      <trans-unit id="ZdD7Zd3" resname="app.dialect.treger">
+        <source>app.dialect.treger</source>
+        <target>Tregerieg</target>
+      </trans-unit>
+      <trans-unit id="TF9joci" resname="app.dialect.gwened">
+        <source>app.dialect.gwened</source>
+        <target>Gwenedeg</target>
+      </trans-unit>
+      <trans-unit id="WQ77eab" resname="app.dialect.goelo">
+        <source>app.dialect.goelo</source>
+        <target>Goelo</target>
+      </trans-unit>
+      <trans-unit id="MDzUI0u" resname="app.dialect.reolad">
+        <source>app.dialect.reolad</source>
+        <target>Standard</target>
+      </trans-unit>
+      <trans-unit id="VwokZ0E" resname="app.gour.U1.symbol">
+        <source>app.gour.U1.symbol</source>
+        <target>S1</target>
+      </trans-unit>
+      <trans-unit id="JQuJLEa" resname="app.gour.U2.symbol">
+        <source>app.gour.U2.symbol</source>
+        <target>S2</target>
+      </trans-unit>
+      <trans-unit id="qATMamv" resname="app.gour.U3.symbol">
+        <source>app.gour.U3.symbol</source>
+        <target>S3</target>
+      </trans-unit>
+      <trans-unit id="LUXUzQS" resname="app.gour.L1.symbol">
+        <source>app.gour.L1.symbol</source>
+        <target>P1</target>
+      </trans-unit>
+      <trans-unit id="Ux2dugh" resname="app.gour.L2.symbol">
+        <source>app.gour.L2.symbol</source>
+        <target>P2</target>
+      </trans-unit>
+      <trans-unit id="ELn1TBT" resname="app.gour.L3.symbol">
+        <source>app.gour.L3.symbol</source>
+        <target>P3</target>
+      </trans-unit>
+      <trans-unit id="Pz6MZrr" resname="app.gour.D.symbol">
+        <source>app.gour.D.symbol</source>
+        <target>I</target>
+      </trans-unit>
+      <trans-unit id="7swrT8u" resname="app.verb.view_more">
+        <source>app.verb.view_more</source>
+        <target>More languages</target>
+      </trans-unit>
+      <trans-unit id="Ho5ycNZ" resname="app.admin.verb.edit.title">
+        <source>app.admin.verb.edit.title</source>
+        <target>__app.admin.verb.edit.title</target>
+      </trans-unit>
+      <trans-unit id="SOo0Sxy" resname="app.admin.verb.create.title">
+        <source>app.admin.verb.create.title</source>
+        <target>__app.admin.verb.create.title</target>
+      </trans-unit>
+      <trans-unit id="t8B2K_Y" resname="app.admin.source.edit.title">
+        <source>app.admin.source.edit.title</source>
+        <target>__app.admin.source.edit.title</target>
+      </trans-unit>
+      <trans-unit id="VXqMm0w" resname="app.admin.source.create.title">
+        <source>app.admin.source.create.title</source>
+        <target>__app.admin.source.create.title</target>
+      </trans-unit>
+      <trans-unit id="I0qZ5tR" resname="app.verb.other_forms">
+        <source>app.verb.other_forms</source>
+        <target>Other forms</target>
+      </trans-unit>
+      <trans-unit id="O8JcWGW" resname="app.geriafurch.alt">
+        <source>app.geriafurch.alt</source>
+        <target>Geriafurch.alt</target>
+      </trans-unit>
+      <trans-unit id="UnfOmys" resname="app.geriafurch">
+        <source>app.geriafurch</source>
+        <target>Geriafurch</target>
+      </trans-unit>
+      <trans-unit id="DesWvMt" resname="app.copy.tense">
+        <source>app.copy.tense</source>
+        <target>Copy this whole tense</target>
+      </trans-unit>
+      <trans-unit id="N.k3Ndy" resname="app.copy.form">
+        <source>app.copy.form</source>
+        <target>Copy this form</target>
+      </trans-unit>
+      <trans-unit id="sQE4aYk" resname="app.message.copy.success">
+        <source>app.message.copy.success</source>
+        <target>The conjugation has been copied in the clipboard.</target>
+      </trans-unit>
+      <trans-unit id="Y__DXvr" resname="app.message.copy.error">
+        <source>app.message.copy.error</source>
+        <target>An error occured during the copy in the clipboard.</target>
+      </trans-unit>
+      <trans-unit id="e_85FyD" resname="app.message.email.success">
+        <source>app.message.email.success</source>
+        <target>Message sent successfuly.</target>
+      </trans-unit>
+      <trans-unit id="nf_l7.9" resname="app.message.email.error">
+        <source>app.message.email.error</source>
+        <target>An error occured while sending the message. Please try again.</target>
+      </trans-unit>
+      <trans-unit id="bSWqAzf" resname="app.sources.title">
+        <source>app.sources.title</source>
+        <target>Sources:</target>
+      </trans-unit>
+      <trans-unit id="PCpcKwJ" resname="app.page.sources">
+        <source>app.page.sources</source>
+        <target>Sources</target>
+      </trans-unit>
+      <trans-unit id="FiYcqzv" resname="app.source.type.grammar">
+        <source>app.source.type.grammar</source>
+        <target>Grammar</target>
+      </trans-unit>
+      <trans-unit id=".69HyCB" resname="app.source.type.traduction">
+        <source>app.source.type.traduction</source>
+        <target>Translation</target>
+      </trans-unit>
+      <trans-unit id="tF8ytn6" resname="app.source.type.traduction.fr">
+        <source>app.source.type.traduction.fr</source>
+        <target>French translations</target>
+      </trans-unit>
+      <trans-unit id="2CpGFmH" resname="app.source.type.traduction.en">
+        <source>app.source.type.traduction.en</source>
+        <target>English translations</target>
+      </trans-unit>
+      <trans-unit id="Akd1OXK" resname="app.source.type.verb">
+        <source>app.source.type.verb</source>
+        <target>Verbs</target>
+      </trans-unit>
+      <trans-unit id="HzXEzV6" resname="app.page.yezhadur">
+        <source>app.page.yezhadur</source>
+        <target>Grammar lesson</target>
+      </trans-unit>
+      <trans-unit id="ZSnKs6h" resname="app.source_code">
+        <source>app.source_code</source>
+        <target>Source code</target>
+      </trans-unit>
+      <trans-unit id="gV0kdCS" resname="app.form.search.term">
+        <source>app.form.search.term</source>
+        <target>Searched term</target>
+      </trans-unit>
+      <trans-unit id=".mQqWei" resname="app.form.search.language_code">
+        <source>app.form.search.language_code</source>
+        <target>Language</target>
+      </trans-unit>
+      <trans-unit id="DhjQNwG" resname="app.email.error">
+        <source>app.email.error</source>
+        <target>__app.email.error</target>
+      </trans-unit>
+      <trans-unit id="LFE8SfI" resname="app.email.sent">
+        <source>app.email.sent</source>
+        <target>__app.email.sent</target>
       </trans-unit>
     </body>
   </file>

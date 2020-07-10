@@ -9,20 +9,24 @@
 @import 'contact.scss';
 @import 'footer.scss';
 @import 'header.scss';
-
+@font-face 
+{
+    font-family: "Nunito";
+    src: url('../fonts/NunitoSans-Regular.ttf') format('truetype');
+}
 body {
   font-family: 'Nunito';
   letter-spacing: 0.0625em;
 }
 
-a {
-  color: $primary;
-  &:focus,
-  &:hover {
-    text-decoration: none;
-    color: darken($primary, 20%);
-  }
-}
+//a {
+//  color: $primary;
+//  &:focus,
+//  &:hover {
+//    text-decoration: none;
+//    color: darken($primary, 20%);
+//  }
+//}
 
 .bg-black {
   background-color: $black !important;

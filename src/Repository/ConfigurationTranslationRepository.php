@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\ConfigurationTranslation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method ConfigurationTranslation|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,37 +14,21 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ConfigurationTranslationRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ConfigurationTranslation::class);
     }
 
-    // /**
-    //  * @return ConfigurationTranslation[] Returns an array of ConfigurationTranslation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findByCodeAndLocale($code, $locale)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('ct')
+            ->leftJoin('ct.configuration', 'c')
+            ->where('c.code = :code')
+            ->andWhere('ct.locale = :locale')
+            ->setParameter('code', $code)
+            ->setParameter('locale', $locale)
             ->getQuery()
-            ->getResult()
+            ->getSingleResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ConfigurationTranslation
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
